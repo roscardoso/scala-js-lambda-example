@@ -1,0 +1,21 @@
+language: scala
+scala:
+- 2.12.5
+jdk:
+- oraclejdk8
+script:
+- sbt fullOptJS
+- zip -j scala-js-lambda-example-opt.zip target/scala-2.12/scala-js-lambda-example-opt.js
+deploy:
+  provider: lambda
+  function_name: scala-js-lambda-example
+  region: eu-west-2
+  role: arn:aws:iam::375657522148:role/scala-js-lambda-role
+  runtime: nodejs8.10
+  handler_name: sayHello
+  module_name: scala-js-lambda-example-opt
+  zip: scala-js-lambda-example-opt.zip
+  secret_access_key:
+    secure: u/tX8qornwTT7uHxutr/dFCEpx2CNN4Hcx4C4ImCQsLa3k6kRKHTt5ZjIUaOrz5OI6sVWNyAirwWvxfiSD4vdu7tJjAHXput9pbXc9Y6SlyvXTwiNnon28CTml3r5rzhulNXlX7qA11IfBAsnxHBtfZQDj8VPj9YNwPVVlPEx0v4HI4GwABgmh9elmdAmxgXqDzfVxyBlDOJpONDwl/qVeHtuTrh7b11caYiw3bCqwhF2IGJ0GyLMNG45DezKeK5E9loXxI4qj8lnQeoQNPGd/iARhgHiivCSbTm+bg93u45vJUNYwzhH2QwtuyV1iWDM984NQzCDuwbKj7yVIeOkDZwrk7e8b7d+kf2gYsvTOZwlEzpPO1pCuue+rW1y7ZLZOuwEA+wa1y6GrvLM4yPJsiicrUxIv/pnSTBLVARTKWYnRJuoy4I+MLCLc4WqwvcJ/3zR/TRQOMzZf6TuV6706UiFC20SCGAr+jkRlem9cjAwf5i5ETBh9Mf26dxr4LjzmFAzWrOtxuaGLNWZDfWFAdWvPZeWWALca1HoAVQ9GQkyWGdGDSXMKhna7a6CtcXmyWTEW8jH8Rjw9BZAmodJTvq0gUjLcAbvyVVZlfKIuIyhq5FnPURoMitHOi8W3ziDRPdUvVzPjRQadEeKcKmr/fzHrUZYDAKglnZ8Etzwlw=
+  access_key_id:
+    secure: mcR45ftRjS1MGJoSz1avIa9gRB20yzyPq0n/XNJTXYE68uWSF4CN/27xoc6/VD0L8VaL+hPTfJ29VU6nlWbXVbW+aB9BXO4bYO89otd4qEEetVzrd36Vx+QmrRFES+4J7tSoIcTQU6PlwjEop32iTA+74Cyju4IX/HAE7LRGz598rsfBMplKcbOkwPXn/GZT0g9JkdDHLPIOSMIX8ZVBsM2U6Ja5M5RELkXNgYltIwVwYrFlXCDJ4Y31jc7R2La83O8jfkTCjfwJHjomJ6H7oElDUphnxBJ8le+fMHkN2XKnLgAnRnSKr9lj0i2yxcB++sd5vA5M2/ZFeDk3pTHCRJGftBYR56I9O+op9NZ/cZ+SY1niDcJ1ttIoDfFuch1XPlZhUOlRHtmDz0WwNdejS+6vUAu1VWgDZ2ogVwVsaWsWtiOSWqzhLYWn0lsfZ+XmtgvzccnvQqIkvcwNcK70f96xvPM/OZbDsC+FtLONdBphlaldKz6v8YAc3CLnvOUR+YpgSMnba/rIs3NSkc9nCLRW5a3t7xx6D4Z3H4QUp0w+6mdwvBvXH6MphlCqgC82ggBSBTYCMHHgTHvSwp1CIuOJ75qL8t0HScCBJpTo85cp/68kjbXD/fcw96IyDH2MJ5u2ZK4quOPU76aWw5gHdT0xyR0JSOpFbucn0l2ueV0=
